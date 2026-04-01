@@ -1,10 +1,10 @@
 from fastapi import FastAPI, HTTPException, Depends
 from typing import Annotated
-import models
 from database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from schema import VinylRecordBase
 from fastapi.middleware.cors import CORSMiddleware
+import models
 
 
 app = FastAPI(title="Vinyl Record Library")

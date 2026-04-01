@@ -1,6 +1,7 @@
 "use client";
 
 import { RecordType } from "@/types/types";
+import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 
 export const ClientRecords = ({
@@ -15,8 +16,6 @@ export const ClientRecords = ({
       record.artist.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  console.log("Filtered records:", filteredRecords);
-
   return (
     <div className="flex items-center justify-center flex-wrap my-2 flex-col w-full">
       <input
@@ -28,23 +27,26 @@ export const ClientRecords = ({
         }}
       />
       <div className="flex flex-wrap gap-2 justify-center items-center">
-        {filteredRecords.map(({ album, artist }, idx) => (
-          <div
-            className="bg-stone-800 rounded p-2 h-96 w-96 text-sky-100 font-serif m-2 flex flex-col justify-center items-center"
+        {filteredRecords.map(({ album, artist, id }) => (
+          <Link
             key={album}
+            href={`/records/${id}`}
+            className="cursor-pointer"
           >
-            <img
-              className="rounded border border-sky-500"
-              src="https://placehold.co/300x200/000000/ff00c8.png"
-            />
-            <p>
-              <span className="text-sky-500">{idx + 1}: </span>
-              {artist}
-            </p>
-            <p>
-              <span className="text-sky-500">Album:</span> {album}
-            </p>
-          </div>
+            <div className="bg-stone-800 rounded p-2 h-96 w-96 text-sky-100 m-2 flex flex-col justify-center items-center">
+              <img
+                className="rounded border border-sky-500"
+                src="https://placehold.co/300x200/000000/ff00c8.png"
+              />
+              <p>
+                <span className="text-sky-500">{id}: </span>
+                {artist}
+              </p>
+              <p>
+                <span className="text-sky-500">Album:</span> {album}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
