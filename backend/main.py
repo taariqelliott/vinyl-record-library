@@ -13,7 +13,7 @@ models.Base.metadata.create_all(bind=engine)
 origins = [
     "http://localhost",
     "http://localhost:3000",
-    "localhost:3000",
+    "https://*.vercel.app",
 ]
 
 app.add_middleware(
