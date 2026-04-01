@@ -1,14 +1,17 @@
 import { RecordType } from "@/types/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function RecordPage({
   params,
 }: {
   params: Promise<{ id: number }>;
 }) {
   const recordId = (await params).id;
-  const response = await fetch(
-    `https://vinyl-record-library-jxg2.vercel.app/records/${recordId}`
-  );
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const response = await fetch(`${apiUrl}/records/${recordId}`, {
+    cache: "no-store",
+  });
   const record: RecordType = await response.json();
   const {
     album,
@@ -31,7 +34,7 @@ export default async function RecordPage({
         <p>Album artwork: {album_artwork}</p>
         <p>Condition: {condition}</p>
         <p>Format: {format}</p>
-        <p>Genre: {genre}</p>
+        <p>Genre: {genre.join(", ")}</p>
         <p>Label: {record_label}</p>
         <p>Year: {year}</p>
       </div>
