@@ -6,7 +6,9 @@ export default async function RecordPage({
   params: Promise<{ id: number }>;
 }) {
   const recordId = (await params).id;
-  const response = await fetch(`https://vinyl-record-library-jxg2.vercel.app/records/${recordId}`);
+  const response = await fetch(
+    `https://vinyl-record-library-jxg2.vercel.app/records/${recordId}`
+  );
   const record: RecordType = await response.json();
   const {
     album,
