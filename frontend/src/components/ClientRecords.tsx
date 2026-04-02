@@ -26,25 +26,23 @@ export const ClientRecords = ({
           setSearchQuery(event.target.value);
         }}
       />
-      <div className="flex flex-wrap gap-2 justify-center items-center">
+      <div className="flex flex-wrap gap-4 justify-center items-center">
         {filteredRecords.map(({ album, artist, id, album_artwork }) => (
           <Link key={id} href={`/records/${id}`} className="cursor-pointer">
-            <div className="bg-stone-800 rounded p-2 h-96 w-96 text-sky-100 m-2 flex flex-col justify-center items-center">
+            <div className="bg-stone-800 rounded-lg p-4 w-72 text-sky-100 hover:bg-stone-700 transition-colors">
               <img
-                className="rounded border border-sky-500"
+                className="rounded border border-sky-500 w-full h-72 object-cover mb-3"
                 src={
                   album_artwork ||
-                  "https://placehold.co/250x250/000000/ff00c8.png"
+                  "https://placehold.co/300x300/1c1917/0ea5e9.png?text=No+Image"
                 }
                 alt={`${album} cover`}
               />
-              <p>
-                <span className="text-sky-500">{id}: </span>
-                {artist}
-              </p>
-              <p>
-                <span className="text-sky-500">Album:</span> {album}
-              </p>
+              <div className="space-y-1">
+                <p className="text-sm text-sky-500">#{id}</p>
+                <p className="font-semibold truncate">{artist}</p>
+                <p className="text-sm text-sky-300 truncate">{album}</p>
+              </div>
             </div>
           </Link>
         ))}
