@@ -1,14 +1,26 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, UploadFile, File, Form
 from typing import Annotated
 from database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from schema import VinylRecordBase
 from fastapi.middleware.cors import CORSMiddleware
 import models
+import json
+import cloudinary
+import cloudinary.uploader
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 app = FastAPI(title="Vinyl Record Library")
 models.Base.metadata.create_all(bind=engine)
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+)
 
 origins = [
     "http://localhost",
@@ -60,17 +72,36 @@ async def get_record(record_id: int, db: db_dependency):
 
 
 @app.post("/records/")
-async def create_record(record: VinylRecordBase, db: db_dependency):
+async def create_record(
+    artist: str = Form(...),
+    album: str = Form(...),
+    album_artist: str = Form(...),
+    year: int = Form(...),
+    genre: str = Form(...),
+    record_label: str = Form(...),
+    format: str = Form(...),
+    condition: str = Form(...),
+    album_artwork: UploadFile = File(...),
+    db: Session = Depends(get_db),
+):
+    # Upload image to Cloudinary
+    try:
+        result = cloudinary.uploader.upload(album_artwork.file)
+        artwork_url = result["secure_url"]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Image upload failed: {str(e)}")
+
+    # Create record with the Cloudinary URL
     db_record = models.VinylRecords(
-        artist=record.artist,
-        album_artist=record.album_artist,
-        album=record.album,
-        year=record.year,
-        genre=record.genre,
-        record_label=record.record_label,
-        format=record.format,
-        condition=record.condition,
-        album_artwork=record.album_artwork,
+        artist=artist,
+        album_artist=album_artist,
+        album=album,
+        year=year,
+        genre=json.loads(genre),
+        record_label=record_label,
+        format=format,
+        condition=condition,
+        album_artwork=artwork_url,
     )
     db.add(db_record)
     db.commit()
