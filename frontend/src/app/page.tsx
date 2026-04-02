@@ -9,5 +9,9 @@ export default async function Home() {
     cache: "no-store",
   });
   const recordsArray: RecordType[] = await data.json();
-  return <ClientRecords recordsArray={recordsArray} />;
+  return (
+    <div className="my-2">
+      <ClientRecords recordsArray={recordsArray} />
+    </div>
+  );
 }
