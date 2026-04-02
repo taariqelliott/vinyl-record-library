@@ -1,5 +1,8 @@
 "use client";
 
+
+
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 export default function AddRecordPage() {
@@ -12,10 +15,15 @@ export default function AddRecordPage() {
   const [format, setFormat] = useState("");
   const [condition, setCondition] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const router = useRouter();
 
   const setImageFileHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
     const file = event.target.files[0];
+    if (file.size > 10 * 1024 * 1024) {
+      alert("File Size To Large");
+      return;
+    }
     setImageFile(file);
   };
 
@@ -50,10 +58,9 @@ export default function AddRecordPage() {
         alert(`Failed to add record: ${JSON.stringify(error)}`);
         return;
       }
-
-      const result = await response.json();
-      console.log(result);
-      alert("Record added!");
+      const res = await response.json();
+      console.log(res);
+      router.push("/");
     } catch (error) {
       console.error("Network error:", error);
       alert("Network error");

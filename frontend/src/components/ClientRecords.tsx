@@ -58,6 +58,12 @@ export const ClientRecords = ({
           }}
         />
       </div>
+      <Link
+        href="/add"
+        className="bg-stone-900 text-sky-500 px-2 py-1 rounded m-2"
+      >
+        Add A Record
+      </Link>
       <div className="flex flex-wrap gap-4 justify-center items-center">
         {filteredRecords.map(({ album, artist, id, album_artwork }) => (
           <Link key={id} href={`/records/${id}`} className="cursor-pointer">
