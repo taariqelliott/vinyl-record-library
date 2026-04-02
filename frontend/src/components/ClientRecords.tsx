@@ -27,12 +27,12 @@ export const ClientRecords = ({
         }}
       />
       <div className="flex flex-wrap gap-2 justify-center items-center">
-        {filteredRecords.map(({ album, artist, id }) => (
+        {filteredRecords.map(({ album, artist, id, album_artwork }) => (
           <Link key={id} href={`/records/${id}`} className="cursor-pointer">
             <div className="bg-stone-800 rounded p-2 h-96 w-96 text-sky-100 m-2 flex flex-col justify-center items-center">
               <img
                 className="rounded border border-sky-500"
-                src="https://placehold.co/300x200/000000/ff00c8.png"
+                src={`${album_artwork}`}
                 alt={`${album} cover`}
               />
               <p>
