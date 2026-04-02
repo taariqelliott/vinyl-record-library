@@ -1,5 +1,5 @@
 export type RecordType = {
-  id: number;
+  id?: number;
   artist: string;
   album_artist: string;
   album: string;
