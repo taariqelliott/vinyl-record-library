@@ -29,6 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${jetBrains.className}  h-full antialiased`}>
+      <link rel="icon" href="/vr.png" sizes="any" />
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
