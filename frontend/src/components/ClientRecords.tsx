@@ -39,7 +39,6 @@ export const ClientRecords = ({
                 alt={`${album} cover`}
               />
               <div className="space-y-1">
-                <p className="text-sm text-sky-500">#{id}</p>
                 <p className="font-semibold truncate">{artist}</p>
                 <p className="text-sm text-sky-300 truncate">{album}</p>
               </div>
