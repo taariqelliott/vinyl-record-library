@@ -28,10 +28,16 @@ export default async function RecordPage({
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div className="rounded-2xl bg-stone-900 text-sky-500 p-12 gap-2 flex flex-col w-120 h-120">
+        <img
+          src={
+            album_artwork || "https://placehold.co/300x300/000000/ff00c8.png"
+          }
+          alt={`${album} cover`}
+          className="rounded border border-sky-500 w-full object-cover"
+        />
         <p>Album: {album}</p>
         <p>Artist: {artist}</p>
         <p>Album Artist: {album_artist}</p>
-        <img src={album_artwork}/>
         <p>Condition: {condition}</p>
         <p>Format: {format}</p>
         <p>Genre: {genre.join(", ")}</p>
