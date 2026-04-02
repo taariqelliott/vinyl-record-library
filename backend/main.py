@@ -26,6 +26,7 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "https://*.vercel.app",
+    "https://cratekeeper.vercel.app",
 ]
 
 app.add_middleware(
