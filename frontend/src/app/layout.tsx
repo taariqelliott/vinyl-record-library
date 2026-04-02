@@ -18,7 +18,7 @@ const jetBrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vinyl Record Library",
+  title: "Crate Keeper",
   description: "By Taariq Elliott",
 };
 
