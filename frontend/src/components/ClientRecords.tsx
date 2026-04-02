@@ -32,7 +32,7 @@ export const ClientRecords = ({
             <div className="bg-stone-800 rounded p-2 h-96 w-96 text-sky-100 m-2 flex flex-col justify-center items-center">
               <img
                 className="rounded border border-sky-500"
-                src={`${album_artwork}`}
+                src={album_artwork}
                 alt={`${album} cover`}
               />
               <p>

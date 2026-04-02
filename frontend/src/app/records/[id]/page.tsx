@@ -31,7 +31,7 @@ export default async function RecordPage({
         <p>Album: {album}</p>
         <p>Artist: {artist}</p>
         <p>Album Artist: {album_artist}</p>
-        <p>Album artwork: {album_artwork}</p>
+        <img src={album_artwork}/>
         <p>Condition: {condition}</p>
         <p>Format: {format}</p>
         <p>Genre: {genre.join(", ")}</p>
