@@ -73,23 +73,23 @@ export default function AddRecordPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-8">
+    <div className="mx-auto max-w-7xl px-6 py-4">
       <Button
         variant="ghost"
         size="sm"
         nativeButton={false}
         render={<Link href="/" />}
-        className="mb-6 text-muted-foreground hover:text-foreground"
+        className="mb-3 text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="size-4" />
         Back to collection
       </Button>
 
       <div className="mx-auto max-w-lg">
-        <Card className="overflow-hidden border-border/50 shadow-xl shadow-orange-500/5">
-          <CardHeader className="space-y-1 bg-linear-to-br from-orange-500 to-amber-500 px-6 py-8 text-white">
-            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-              <Disc3 className="size-6" />
+        <Card className="overflow-hidden border-border/50 pt-0 gap-0 shadow-xl shadow-orange-500/5">
+          <CardHeader className="space-y-1 bg-linear-to-br from-orange-500 to-amber-500 px-6 py-5 text-white">
+            <div className="mx-auto mb-2 flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+              <Disc3 className="size-5" />
             </div>
             <h1 className="text-center text-2xl font-bold tracking-tight">
               Add New Record
@@ -99,9 +99,9 @@ export default function AddRecordPage() {
             </p>
           </CardHeader>
 
-          <CardContent className="flex flex-col gap-5 p-6">
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="space-y-2">
+          <CardContent className="flex flex-col gap-3 p-5">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-1">
                 <Label
                   htmlFor="album"
                   className="text-xs uppercase tracking-wider text-muted-foreground"
@@ -116,7 +116,7 @@ export default function AddRecordPage() {
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <Label
                   htmlFor="artist"
                   className="text-xs uppercase tracking-wider text-muted-foreground"
@@ -132,7 +132,7 @@ export default function AddRecordPage() {
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1">
               <Label
                 htmlFor="album_artist"
                 className="text-xs uppercase tracking-wider text-muted-foreground"
@@ -147,10 +147,10 @@ export default function AddRecordPage() {
               />
             </div>
 
-            <Separator className="my-1" />
+            <Separator />
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="space-y-2">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-1">
                 <Label
                   htmlFor="year"
                   className="text-xs uppercase tracking-wider text-muted-foreground"
@@ -166,7 +166,7 @@ export default function AddRecordPage() {
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <Label
                   htmlFor="genre"
                   className="text-xs uppercase tracking-wider text-muted-foreground"
@@ -184,8 +184,8 @@ export default function AddRecordPage() {
               </div>
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-3">
-              <div className="space-y-2">
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div className="space-y-1">
                 <Label
                   htmlFor="label"
                   className="text-xs uppercase tracking-wider text-muted-foreground"
@@ -200,7 +200,7 @@ export default function AddRecordPage() {
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <Label
                   htmlFor="format"
                   className="text-xs uppercase tracking-wider text-muted-foreground"
@@ -215,7 +215,7 @@ export default function AddRecordPage() {
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <Label
                   htmlFor="condition"
                   className="text-xs uppercase tracking-wider text-muted-foreground"
@@ -231,9 +231,9 @@ export default function AddRecordPage() {
               </div>
             </div>
 
-            <Separator className="my-1" />
+            <Separator />
 
-            <div className="space-y-2">
+            <div className="space-y-1">
               <Label
                 htmlFor="image"
                 className="text-xs uppercase tracking-wider text-muted-foreground"
@@ -242,7 +242,7 @@ export default function AddRecordPage() {
               </Label>
               <label
                 htmlFor="image"
-                className="group flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border p-8 transition-colors hover:border-orange-500/50 hover:bg-orange-500/5"
+                className="group flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border p-5 transition-colors hover:border-orange-500/50 hover:bg-orange-500/5"
               >
                 <div className="flex size-10 items-center justify-center rounded-full bg-orange-500/10 transition-colors group-hover:bg-orange-500/20">
                   <Upload className="size-5 text-orange-500" />
@@ -267,7 +267,7 @@ export default function AddRecordPage() {
 
             <Button
               onClick={sendData}
-              className="mt-2 w-full bg-orange-500 py-5 text-base font-semibold text-white shadow-lg shadow-orange-500/20 transition-all hover:bg-orange-600 hover:shadow-orange-500/30"
+              className="w-full bg-orange-500 py-5 text-base font-semibold text-white shadow-lg shadow-orange-500/20 transition-all hover:bg-orange-600 hover:shadow-orange-500/30"
             >
               Add to Collection
             </Button>
