@@ -1,8 +1,29 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { RecordType } from "@/types/types";
+import { Disc3, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
+
+const filterLabels: Record<string, string> = {
+  album: "Album",
+  artist: "Artist",
+  album_artist: "Album Artist",
+  genre: "Genre",
+  year: "Year",
+  record_label: "Label",
+  format: "Format",
+  condition: "Condition",
+};
 
 export const ClientRecords = ({
   recordsArray,
@@ -33,57 +54,95 @@ export const ClientRecords = ({
   });
 
   return (
-    <div className="flex items-center justify-center flex-wrap my-2 flex-col w-full gap-y-3">
-      <div className="flex w-full">
-        <select
-          value={filterParam}
-          onChange={(e) => setFilterParam(e.target.value as keyof RecordType)}
-          className="mx-2 bg-transparent border border-slate-200 rounded-md px-3 py-2"
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="flex flex-1 items-center gap-2 rounded-lg border border-border bg-card p-1.5 shadow-sm">
+          <Select
+            value={filterParam}
+            onValueChange={(val) => setFilterParam(val as keyof RecordType)}
+          >
+            <SelectTrigger className="w-36 border-0 bg-transparent shadow-none">
+              <SelectValue placeholder="Filter by">
+                {filterLabels[filterParam]}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="album">Album</SelectItem>
+              <SelectItem value="artist">Artist</SelectItem>
+              <SelectItem value="album_artist">Album Artist</SelectItem>
+              <SelectItem value="genre">Genre</SelectItem>
+              <SelectItem value="year">Year</SelectItem>
+              <SelectItem value="record_label">Label</SelectItem>
+              <SelectItem value="format">Format</SelectItem>
+              <SelectItem value="condition">Condition</SelectItem>
+            </SelectContent>
+          </Select>
+          <div className="h-6 w-px bg-border" />
+          <div className="relative flex-1">
+            <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              className="border-0 bg-transparent pl-9 shadow-none focus-visible:ring-0"
+              type="text"
+              placeholder="Search your collection..."
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                setSearchQuery(event.target.value);
+              }}
+            />
+          </div>
+        </div>
+        <Button
+          nativeButton={false}
+          render={<Link href="/add" />}
+          className="bg-orange-500 text-white shadow-md shadow-orange-500/20 hover:bg-orange-600"
         >
-          <option value="album">Album</option>
-          <option value="artist">Artist</option>
-          <option value="album_artist">Album Artist</option>
-          <option value="genre">Genre</option>
-          <option value="year">Year</option>
-          <option value="record_label">Label</option>
-          <option value="format">Format</option>
-          <option value="condition">Condition</option>
-        </select>
-        <input
-          className="mx-2 w-[calc(100%-1rem)] bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-          type="text"
-          placeholder="Search for records..."
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setSearchQuery(event.target.value);
-          }}
-        />
+          <Plus className="size-4" />
+          Add Record
+        </Button>
       </div>
-      <Link
-        href="/add"
-        className="bg-stone-900 text-sky-500 px-2 py-1 rounded m-2"
-      >
-        Add A Record
-      </Link>
-      <div className="flex flex-wrap gap-4 justify-center items-center">
-        {filteredRecords.map(({ album, artist, id, album_artwork }) => (
-          <Link key={id} href={`/records/${id}`} className="cursor-pointer">
-            <div className="bg-stone-800 rounded-lg p-4 w-72 text-sky-100 hover:bg-stone-700 transition-colors">
-              <img
-                className="rounded border border-sky-500 w-full h-72 object-cover mb-3"
-                src={
-                  album_artwork ||
-                  "https://placehold.co/300x300/1c1917/0ea5e9.png?text=No+Image"
-                }
-                alt={`${album} cover`}
-              />
-              <div className="space-y-1">
-                <p className="font-semibold truncate">{artist}</p>
-                <p className="text-sm text-sky-300 truncate">{album}</p>
+
+      {filteredRecords.length === 0 ? (
+        <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
+          <div className="flex size-16 items-center justify-center rounded-full bg-orange-500/10">
+            <Disc3 className="size-8 text-orange-500" />
+          </div>
+          <div>
+            <p className="text-lg font-medium">No records found</p>
+            <p className="text-sm text-muted-foreground">
+              {searchQuery
+                ? "Try a different search term"
+                : "Add your first record to get started"}
+            </p>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {filteredRecords.map(({ album, artist, id, album_artwork }) => (
+            <Link key={id} href={`/records/${id}`} className="group">
+              <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/5 hover:border-orange-500/30 hover:-translate-y-1">
+                <div className="relative aspect-square overflow-hidden">
+                  <img
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    src={
+                      album_artwork ||
+                      "https://placehold.co/400x400/27272a/f97316.png?text=No+Image"
+                    }
+                    alt={`${album} cover`}
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                </div>
+                <div className="p-3">
+                  <p className="truncate text-sm font-semibold leading-tight">
+                    {artist}
+                  </p>
+                  <p className="mt-0.5 truncate text-xs text-muted-foreground">
+                    {album}
+                  </p>
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
