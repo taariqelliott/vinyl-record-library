@@ -3,14 +3,14 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { Disc3 } from "lucide-react";
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const jetBrains = JetBrains_Mono({
+const poppins = Poppins({
   variable: "--font-jetbrains",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -27,13 +27,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn(
-        "h-full",
-        "antialiased",
-        jetBrains.className,
-        "font-sans",
-        inter.variable
-      )}
+      className={cn("h-full", "antialiased", poppins.className)}
     >
       <link rel="icon" href="/vr.png" sizes="any" />
       <body className="min-h-full flex flex-col">

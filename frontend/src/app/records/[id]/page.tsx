@@ -48,9 +48,6 @@ export default async function RecordPage({
       <Card className="overflow-hidden border-border/50 shadow-xl shadow-rose-500/5 relative">
         <CardContent className="p-0">
           <div className="grid md:grid-cols-2">
-            <div className="absolute right-8 top-10">
-              <EditRecord record={record} />
-            </div>
             <div className="relative aspect-square overflow-hidden rounded-xl m-6 bg-zinc-900">
               <img
                 src={
@@ -64,17 +61,20 @@ export default async function RecordPage({
             </div>
 
             <div className="flex flex-col justify-center gap-5 p-8">
-              <div>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-rose-500">
-                  {format}
-                </p>
-                <h1 className="text-3xl font-bold tracking-tight">{album}</h1>
-                <p className="mt-1 text-base text-muted-foreground">{artist}</p>
-                {album_artist !== artist && (
-                  <p className="text-sm text-muted-foreground/70">
-                    Album artist: {album_artist}
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-rose-500">
+                    {format}
                   </p>
-                )}
+                  <h1 className="text-3xl font-bold tracking-tight">{album}</h1>
+                  <p className="mt-1 text-base text-muted-foreground">{artist}</p>
+                  {album_artist !== artist && (
+                    <p className="text-sm text-muted-foreground/70">
+                      Album artist: {album_artist}
+                    </p>
+                  )}
+                </div>
+                <EditRecord record={record} />
               </div>
 
               <Separator className="bg-rose-500/20" />
