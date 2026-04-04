@@ -1,3 +1,4 @@
+import EditRecord from "@/components/EditRecord";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -44,9 +45,12 @@ export default async function RecordPage({
         Back to collection
       </Button>
 
-      <Card className="overflow-hidden border-border/50 shadow-xl shadow-orange-500/5">
+      <Card className="overflow-hidden border-border/50 shadow-xl shadow-orange-500/5 relative">
         <CardContent className="p-0">
           <div className="grid md:grid-cols-2">
+            <div className="absolute right-8 top-10">
+              <EditRecord record={record} />
+            </div>
             <div className="relative aspect-square overflow-hidden rounded-xl m-6 bg-zinc-900">
               <img
                 src={
@@ -56,7 +60,7 @@ export default async function RecordPage({
                 alt={`${album} cover`}
                 className="h-full w-full object-cover rounded-xl"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent md:bg-linear-to-r md:from-transparent md:to-black/10" />
+              {/* <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent md:bg-linear-to-r md:from-transparent md:to-black/10" /> */}
             </div>
 
             <div className="flex flex-col justify-center gap-5 p-8">

@@ -111,17 +111,56 @@ async def create_record(
 
 
 @app.put("/records/{record_id}")
-async def update_record(record_id: int, record: VinylRecordBase, db: db_dependency):
+async def update_record(
+    record_id: int,
+    artist: str = Form(...),
+    album: str = Form(...),
+    album_artist: str = Form(...),
+    year: int = Form(...),
+    genre: str = Form(...),
+    record_label: str = Form(...),
+    format: str = Form(...),
+    condition: str = Form(...),
+    album_artwork: UploadFile | None = File(None),
+    db: Session = Depends(get_db),
+):
     db_record = db.query(models.VinylRecords).filter(
         models.VinylRecords.id == record_id
     )
     existing_record = db_record.first()
     if not existing_record:
         raise HTTPException(status_code=404, detail="Record not found.")
-    db_record.update(
-        {k: v for k, v in record.model_dump().items()}, synchronize_session=False
-    )
+
+    update_data = {
+        "artist": artist,
+        "album_artist": album_artist,
+        "album": album,
+        "year": year,
+        "genre": json.loads(genre),
+        "record_label": record_label,
+        "format": format,
+        "condition": condition,
+    }
+
+    if album_artwork:
+        # Delete old image from Cloudinary
+        old_url = existing_record.album_artwork
+        if old_url:
+            public_id = old_url.split("/")[-1].split(".")[0]
+            cloudinary.uploader.destroy(public_id)
+
+        # Upload new image
+        try:
+            result = cloudinary.uploader.upload(album_artwork.file)
+            update_data["album_artwork"] = result["secure_url"]
+        except Exception as e:
+            raise HTTPException(
+                status_code=500, detail=f"Image upload failed: {str(e)}"
+            )
+
+    db_record.update(update_data, synchronize_session=False)
     db.commit()
+    db.refresh(existing_record)
     return existing_record
 
 

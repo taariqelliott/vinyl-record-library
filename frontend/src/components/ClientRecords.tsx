@@ -1,6 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -14,6 +22,7 @@ import { Disc3, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import AddRecord from "./AddRecord";
 
 const filterLabels: Record<string, string> = {
   album: "Album",
@@ -33,6 +42,7 @@ export const ClientRecords = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterParam, setFilterParam] = useState<keyof RecordType>("album");
+  const [dialogOpen, setDialogOpen] = useState(false);
   const router = useRouter();
 
   const filteredRecords = recordsArray.filter((record) => {
@@ -109,14 +119,25 @@ export const ClientRecords = ({
             />
           </div>
         </div>
-        <Button
-          nativeButton={false}
-          render={<Link href="/add" />}
-          className="bg-orange-500 text-white shadow-md shadow-orange-500/20 hover:bg-orange-600"
-        >
-          <Plus className="size-4" />
-          Add Record
-        </Button>
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogTrigger
+            render={
+              <Button className="bg-orange-500 text-white shadow-md shadow-orange-500/20 hover:bg-orange-600">
+                <Plus className="size-4" />
+                Add Record
+              </Button>
+            }
+          />
+          <DialogContent className="sm:max-w-sm">
+            <DialogHeader>
+              <DialogTitle>Add A Record</DialogTitle>
+              <DialogDescription>
+                Enter the details for a record from your collection.
+              </DialogDescription>
+            </DialogHeader>
+            <AddRecord onSuccess={() => setDialogOpen(false)} />
+          </DialogContent>
+        </Dialog>
       </div>
 
       {filteredRecords.length === 0 ? (
