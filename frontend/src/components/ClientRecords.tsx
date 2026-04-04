@@ -10,8 +10,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RecordType } from "@/types/types";
-import { Disc3, Plus, Search } from "lucide-react";
+import { Disc3, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 const filterLabels: Record<string, string> = {
@@ -32,6 +33,7 @@ export const ClientRecords = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterParam, setFilterParam] = useState<keyof RecordType>("album");
+  const router = useRouter();
 
   const filteredRecords = recordsArray.filter((record) => {
     const value = record[filterParam];
@@ -52,6 +54,23 @@ export const ClientRecords = ({
 
     return false;
   });
+
+  const deleteRecord = async (id: number) => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+    try {
+      const response = await fetch(`${apiUrl}/records/${id}`, {
+        method: "DELETE",
+        headers: {
+          accept: "application/json",
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-8">
@@ -120,6 +139,18 @@ export const ClientRecords = ({
             <Link key={id} href={`/records/${id}`} className="group">
               <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/5 hover:border-orange-500/30 hover:-translate-y-1">
                 <div className="relative aspect-square overflow-hidden">
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      if (id && confirm("Delete this record?")) {
+                        deleteRecord(id);
+                      }
+                    }}
+                    className="absolute right-2 top-2 z-50 rounded-full bg-black/60 p-2 text-white opacity-0 backdrop-blur-sm transition-all hover:bg-red-600 group-hover:opacity-100"
+                  >
+                    <Trash2 className="size-4" />
+                  </button>
                   <img
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     src={
