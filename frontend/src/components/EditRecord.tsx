@@ -23,7 +23,7 @@ export default function EditRecord({ record }: { record: RecordType }) {
   const [album_artist, setAlbumArtist] = useState(record.album_artist);
   const [album, setAlbum] = useState(record.album);
   const [year, setYear] = useState(record.year);
-  const [genre, setGenre] = useState(record.genre);
+  const [genreInput, setGenreInput] = useState(record.genre.join(", "));
   const [record_label, setRecordLabel] = useState(record.record_label);
   const [format, setFormat] = useState(record.format);
   const [condition, setCondition] = useState(record.condition);
@@ -48,7 +48,15 @@ export default function EditRecord({ record }: { record: RecordType }) {
     formData.append("album_artist", album_artist);
     formData.append("album", album);
     formData.append("year", year.toString());
-    formData.append("genre", JSON.stringify(genre));
+    formData.append(
+      "genre",
+      JSON.stringify(
+        genreInput
+          .split(",")
+          .map((g) => g.trim())
+          .filter(Boolean)
+      )
+    );
     formData.append("record_label", record_label);
     formData.append("format", format);
     formData.append("condition", condition);
@@ -99,7 +107,7 @@ export default function EditRecord({ record }: { record: RecordType }) {
               <Input
                 id="edit-album"
                 value={album}
-                className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+                className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
                 onChange={(e) => setAlbum(e.target.value)}
               />
             </div>
@@ -113,7 +121,7 @@ export default function EditRecord({ record }: { record: RecordType }) {
               <Input
                 id="edit-artist"
                 value={artist}
-                className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+                className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
                 onChange={(e) => setArtist(e.target.value)}
               />
             </div>
@@ -129,7 +137,7 @@ export default function EditRecord({ record }: { record: RecordType }) {
             <Input
               id="edit-album-artist"
               value={album_artist}
-              className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+              className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
               onChange={(e) => setAlbumArtist(e.target.value)}
             />
           </div>
@@ -148,7 +156,7 @@ export default function EditRecord({ record }: { record: RecordType }) {
                 id="edit-year"
                 type="number"
                 value={year}
-                className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+                className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
                 onChange={(e) => setYear(Number(e.target.value))}
               />
             </div>
@@ -161,11 +169,9 @@ export default function EditRecord({ record }: { record: RecordType }) {
               </Label>
               <Input
                 id="edit-genre"
-                value={genre.join(", ")}
-                className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
-                onChange={(e) =>
-                  setGenre(e.target.value.split(",").map((g) => g.trim()))
-                }
+                value={genreInput}
+                className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
+                onChange={(e) => setGenreInput(e.target.value)}
               />
             </div>
           </div>
@@ -181,7 +187,7 @@ export default function EditRecord({ record }: { record: RecordType }) {
               <Input
                 id="edit-label"
                 value={record_label}
-                className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+                className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
                 onChange={(e) => setRecordLabel(e.target.value)}
               />
             </div>
@@ -195,7 +201,7 @@ export default function EditRecord({ record }: { record: RecordType }) {
               <Input
                 id="edit-format"
                 value={format}
-                className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+                className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
                 onChange={(e) => setFormat(e.target.value)}
               />
             </div>
@@ -209,7 +215,7 @@ export default function EditRecord({ record }: { record: RecordType }) {
               <Input
                 id="edit-condition"
                 value={condition}
-                className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+                className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
                 onChange={(e) => setCondition(e.target.value)}
               />
             </div>
@@ -226,10 +232,10 @@ export default function EditRecord({ record }: { record: RecordType }) {
             </Label>
             <label
               htmlFor="edit-image"
-              className="group flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border p-5 transition-colors hover:border-orange-500/50 hover:bg-orange-500/5"
+              className="group flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border p-5 transition-colors hover:border-rose-500/50 hover:bg-rose-500/5"
             >
-              <div className="flex size-10 items-center justify-center rounded-full bg-orange-500/10 transition-colors group-hover:bg-orange-500/20">
-                <Upload className="size-5 text-orange-500" />
+              <div className="flex size-10 items-center justify-center rounded-full bg-rose-500/10 transition-colors group-hover:bg-rose-500/20">
+                <Upload className="size-5 text-rose-500" />
               </div>
               <div className="text-center">
                 <p className="text-sm font-medium">
@@ -252,7 +258,7 @@ export default function EditRecord({ record }: { record: RecordType }) {
           <Button
             onClick={sendData}
             nativeButton
-            className="w-full bg-orange-500 py-5 text-base font-semibold text-white shadow-lg shadow-orange-500/20 transition-all hover:bg-orange-600 hover:shadow-orange-500/30"
+            className="w-full bg-rose-500 py-5 text-base font-semibold text-white shadow-lg shadow-rose-500/20 transition-all hover:bg-rose-600 hover:shadow-rose-500/30"
           >
             Save Changes
           </Button>

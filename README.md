@@ -1,6 +1,6 @@
 # Vinyl Record Library
 
-A full-stack web application for cataloging and managing your personal vinyl record collection. Built with a FastAPI backend and a Next.js frontend featuring a modern zinc and orange UI.
+A full-stack web application for cataloging and managing your personal vinyl record collection. Built with a FastAPI backend and a Next.js frontend featuring a modern zinc and rose UI.
 
 ![Tech Stack](https://img.shields.io/badge/Next.js-16-black?logo=next.js) ![Tech Stack](https://img.shields.io/badge/FastAPI-0.135-009688?logo=fastapi) ![Tech Stack](https://img.shields.io/badge/PostgreSQL-blue?logo=postgresql&logoColor=white) ![Tech Stack](https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?logo=tailwindcss&logoColor=white)
 
@@ -10,10 +10,13 @@ A full-stack web application for cataloging and managing your personal vinyl rec
 - Upload album artwork images via Cloudinary
 - Search and filter records by artist, album, year, genre, label, format, and condition
 - Track record condition and format details
+
 ---
+
 ## Tech Stack
 
 ### Backend
+
 - **FastAPI** — Python REST API framework
 - **SQLAlchemy** — ORM for database management
 - **PostgreSQL** — Primary database (deployed on [Railway](https://railway.app/))
@@ -21,6 +24,7 @@ A full-stack web application for cataloging and managing your personal vinyl rec
 - **Pydantic** — Data validation
 
 ### Frontend
+
 - **Next.js 16** — React framework with App Router
 - **React 19** — UI library
 - **TypeScript** — Type-safe JavaScript
@@ -67,17 +71,20 @@ vinyl-record-library/
 ### Backend
 
 1. Navigate to the backend directory:
+
    ```bash
    cd backend
    ```
 
 2. Create and activate a virtual environment:
+
    ```bash
    uv venv
    source .venv/bin/activate
    ```
 
 3. Install dependencies:
+
    ```bash
    uv sync
    ```
@@ -87,6 +94,7 @@ vinyl-record-library/
    - Create a database user and password
 
 5. Create a `.env` file:
+
    ```
    DATABASE_URL=postgresql://your_username:your_password@localhost:5432/VinylRecordLibrary
    CLOUDINARY_CLOUD_NAME=your_cloud_name
@@ -95,33 +103,40 @@ vinyl-record-library/
    ```
 
 6. Start the server:
+
    ```bash
    uvicorn main:app --reload
    ```
-   The API will be available at http://localhost:8000
+
+   The API will be available at <http://localhost:8000>
 
 ### Frontend
 
 1. Navigate to the frontend directory:
+
    ```bash
    cd frontend
    ```
 
 2. Install dependencies:
+
    ```bash
    bun install
    ```
 
 3. Create a `.env` file:
+
    ```
    NEXT_PUBLIC_API_URL=http://localhost:8000
    ```
 
 4. Start the development server:
+
    ```bash
    bun run dev
    ```
-   The application will be available at http://localhost:3000
+
+   The application will be available at <http://localhost:3000>
 
 ## Running Both Servers
 

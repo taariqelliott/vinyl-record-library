@@ -12,7 +12,7 @@ export function ThemeToggle() {
       variant="outline"
       size="icon"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative overflow-hidden border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5"
+      className="relative overflow-hidden border-rose-500/20 hover:border-rose-500/40 hover:bg-rose-500/5"
     >
       <Sun className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
       <Moon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />

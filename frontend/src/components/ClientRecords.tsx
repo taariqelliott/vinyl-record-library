@@ -122,7 +122,7 @@ export const ClientRecords = ({
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger
             render={
-              <Button className="bg-orange-500 text-white shadow-md shadow-orange-500/20 hover:bg-orange-600">
+              <Button className="bg-rose-500 text-white shadow-md shadow-rose-500/20 hover:bg-rose-600">
                 <Plus className="size-4" />
                 Add Record
               </Button>
@@ -142,8 +142,8 @@ export const ClientRecords = ({
 
       {filteredRecords.length === 0 ? (
         <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
-          <div className="flex size-16 items-center justify-center rounded-full bg-orange-500/10">
-            <Disc3 className="size-8 text-orange-500" />
+          <div className="flex size-16 items-center justify-center rounded-full bg-rose-500/10">
+            <Disc3 className="size-8 text-rose-500" />
           </div>
           <div>
             <p className="text-lg font-medium">No records found</p>
@@ -158,7 +158,7 @@ export const ClientRecords = ({
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {filteredRecords.map(({ album, artist, id, album_artwork }) => (
             <Link key={id} href={`/records/${id}`} className="group">
-              <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/5 hover:border-orange-500/30 hover:-translate-y-1">
+              <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-rose-500/5 hover:border-rose-500/30 hover:-translate-y-1">
                 <div className="relative aspect-square overflow-hidden">
                   <button
                     onClick={(event) => {

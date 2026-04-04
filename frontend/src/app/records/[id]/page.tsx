@@ -45,7 +45,7 @@ export default async function RecordPage({
         Back to collection
       </Button>
 
-      <Card className="overflow-hidden border-border/50 shadow-xl shadow-orange-500/5 relative">
+      <Card className="overflow-hidden border-border/50 shadow-xl shadow-rose-500/5 relative">
         <CardContent className="p-0">
           <div className="grid md:grid-cols-2">
             <div className="absolute right-8 top-10">
@@ -65,7 +65,7 @@ export default async function RecordPage({
 
             <div className="flex flex-col justify-center gap-5 p-8">
               <div>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-orange-500">
+                <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-rose-500">
                   {format}
                 </p>
                 <h1 className="text-3xl font-bold tracking-tight">{album}</h1>
@@ -77,13 +77,13 @@ export default async function RecordPage({
                 )}
               </div>
 
-              <Separator className="bg-orange-500/20" />
+              <Separator className="bg-rose-500/20" />
 
               <div className="flex flex-wrap gap-1.5">
                 {genre.map((g) => (
                   <Badge
                     key={g}
-                    className="border-orange-500/20 bg-orange-500/10 text-orange-600 dark:text-orange-400"
+                    className="border-rose-500/20 bg-rose-500/10 text-rose-600 dark:text-rose-400"
                   >
                     {g}
                   </Badge>

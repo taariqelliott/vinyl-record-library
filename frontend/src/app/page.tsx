@@ -13,7 +13,7 @@ export default async function Home() {
     <div className="mx-auto max-w-7xl px-6 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight">
-          Your <span className="text-orange-500">Collection</span>
+          Your <span className="text-rose-500">Collection</span>
         </h1>
         <p className="mt-1 text-muted-foreground">
           {recordsArray.length}{" "}

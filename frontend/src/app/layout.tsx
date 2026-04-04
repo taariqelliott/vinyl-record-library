@@ -39,14 +39,14 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
           <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
-            <div className="h-0.5 bg-linear-to-r from-orange-500 via-orange-400 to-amber-500" />
+            <div className="h-0.5 bg-linear-to-r from-rose-500 via-rose-400 to-rose-500" />
             <div className="flex h-16 items-center justify-between px-6">
               <Link href="/" className="group flex items-center gap-2.5">
-                <div className="flex size-9 items-center justify-center rounded-lg bg-orange-500 text-white shadow-md shadow-orange-500/20 transition-transform group-hover:scale-105">
+                <div className="flex size-9 items-center justify-center rounded-lg bg-rose-500 text-white shadow-md shadow-rose-500/20 transition-transform group-hover:scale-105">
                   <Disc3 className="size-5" />
                 </div>
                 <span className="text-lg font-bold tracking-tight">
-                  Crate<span className="text-orange-500">Keeper</span>
+                  Crate<span className="text-rose-500">Keeper</span>
                 </span>
               </Link>
               <ThemeToggle />

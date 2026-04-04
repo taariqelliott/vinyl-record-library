@@ -41,7 +41,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
     formData.append("album_artist", album_artist);
     formData.append("album", album);
     formData.append("year", year.toString());
-    formData.append("genre", JSON.stringify(genre));
+    formData.append("genre", JSON.stringify(genre.filter(Boolean)));
     formData.append("record_label", record_label);
     formData.append("format", format);
     formData.append("condition", condition);
@@ -83,7 +83,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
           <Input
             id="album"
             placeholder="Album name..."
-            className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+            className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
             onChange={(e) => setAlbum(e.target.value)}
           />
         </div>
@@ -98,7 +98,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
           <Input
             id="artist"
             placeholder="Artist name..."
-            className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+            className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
             onChange={(e) => setArtist(e.target.value)}
           />
         </div>
@@ -114,7 +114,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
         <Input
           id="album_artist"
           placeholder="Album artist..."
-          className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+          className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
           onChange={(e) => setAlbumArtist(e.target.value)}
         />
       </div>
@@ -133,7 +133,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
             id="year"
             type="number"
             placeholder="e.g. 1977"
-            className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+            className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
             onChange={(e) => setYear(Number(e.target.value))}
           />
         </div>
@@ -148,7 +148,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
           <Input
             id="genre"
             placeholder="Jazz, Soul..."
-            className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+            className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
             onChange={(e) =>
               setGenre(e.target.value.split(",").map((g) => g.trim()))
             }
@@ -167,7 +167,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
           <Input
             id="label"
             placeholder="Record label..."
-            className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+            className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
             onChange={(e) => setRecordLabel(e.target.value)}
           />
         </div>
@@ -182,7 +182,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
           <Input
             id="format"
             placeholder='LP, 7"...'
-            className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+            className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
             onChange={(e) => setFormat(e.target.value)}
           />
         </div>
@@ -197,7 +197,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
           <Input
             id="condition"
             placeholder="Mint, VG+..."
-            className="focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+            className="focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
             onChange={(e) => setCondition(e.target.value)}
           />
         </div>
@@ -214,10 +214,10 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
         </Label>
         <label
           htmlFor="image"
-          className="group flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border p-5 transition-colors hover:border-orange-500/50 hover:bg-orange-500/5"
+          className="group flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border p-5 transition-colors hover:border-rose-500/50 hover:bg-rose-500/5"
         >
-          <div className="flex size-10 items-center justify-center rounded-full bg-orange-500/10 transition-colors group-hover:bg-orange-500/20">
-            <Upload className="size-5 text-orange-500" />
+          <div className="flex size-10 items-center justify-center rounded-full bg-rose-500/10 transition-colors group-hover:bg-rose-500/20">
+            <Upload className="size-5 text-rose-500" />
           </div>
           <div className="text-center">
             <p className="text-sm font-medium">
@@ -237,7 +237,7 @@ export default function AddRecord({ onSuccess }: { onSuccess?: () => void }) {
 
       <Button
         onClick={sendData}
-        className="w-full bg-orange-500 py-5 text-base font-semibold text-white shadow-lg shadow-orange-500/20 transition-all hover:bg-orange-600 hover:shadow-orange-500/30"
+        className="w-full bg-rose-500 py-5 text-base font-semibold text-white shadow-lg shadow-rose-500/20 transition-all hover:bg-rose-600 hover:shadow-rose-500/30"
         nativeButton
       >
         Add to Collection
